@@ -148,8 +148,7 @@ else
       touch(profile)
 
       await execPwsh(`Invoke-Webrequest -URI ${baseUrl}/win-64/${micromambaVersion} -OutFile micromamba.tar.bz2`)
-      await execPwsh('C:\\PROGRA~1\\7-Zip\\7z.exe x micromamba.tar.bz2 -aoa')
-      await execPwsh('C:\\PROGRA~1\\7-Zip\\7z.exe x micromamba.tar -ttar -aoa -r Library\\bin\\micromamba.exe')
+      await execPwsh('C:\\PROGRA~1\\Git\\usr\\bin\\tar.exe -xvjf .\micromamba.tar.bz2 Library/bin/micromamba.exe')
       await execPwsh('MOVE -Force Library\\bin\\micromamba.exe micromamba.exe')
       await execPwsh('.\\micromamba.exe --help')
       await execPwsh('.\\micromamba.exe shell init -s powershell -p $HOME\\micromamba')
