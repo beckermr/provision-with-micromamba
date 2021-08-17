@@ -147,17 +147,17 @@ else
       core.startGroup(`Installing environment ${envName} from ${envFilePath} ...`)
       touch(profile)
 
-      await execPwsh(`Invoke-Webrequest -URI ${baseUrl}/win-64/${micromambaVersion} -OutFile micromamba.tar.bz2`)
-      await execPwsh('C:\\PROGRA~1\\Git\\usr\\bin\\tar.exe -xvjf .\micromamba.tar.bz2 Library/bin/micromamba.exe')
-      await execPwsh('MOVE -Force Library\\bin\\micromamba.exe micromamba.exe')
-      await execPwsh('.\\micromamba.exe --help')
-      await execPwsh('.\\micromamba.exe shell init -s powershell -p $HOME\\micromamba')
-      await execPwsh('.\\micromamba.exe shell init -s bash -p ~\\micromamba -y')
-      await execPwsh('.\\micromamba.exe shell init -s cmd.exe -p ~\\micromamba -y')
+      await execPwsh(`Invoke-Webrequest -URI ${baseUrl}/win-64/${micromambaVersion} -OutFile ~\micromamba.tar.bz2`)
+      await execPwsh('$env:Path = "C:\PROGRA~1\Git\usr\bin;" + $env:Path')
+      await execPwsh('tar.exe -xvjf ~/micromamba.tar.bz2 --strip-components 2 -C ~ Library/bin/micromamba.exe')
+      await execPwsh('~\micromamba.exe --help')
+      await execPwsh('~\micromamba.exe shell init -s powershell -p $HOME\\micromamba')
+      await execPwsh('~\micromamba.exe shell init -s bash -p ~\\micromamba -y')
+      await execPwsh('~\micromamba.exe shell init -s cmd.exe -p ~\\micromamba -y')
       // Can only init once right now ...
-      // await execPwsh(".\\micromamba.exe shell init -s bash -p $HOME\\micromamba")
+      // await execPwsh("~\micromamba.exe shell init -s bash -p $HOME\\micromamba")
       await execPwsh('MD $HOME\\micromamba\\pkgs -ea 0')
-      await execPwsh(`.\\micromamba.exe create -n ` + envName + ` --strict-channel-priority -y -f ${envFilePath}`)
+      await execPwsh(`~\micromamba.exe create -n ` + envName + ` --strict-channel-priority -y -f ${envFilePath}`)
       await execPwsh(autoactivate)
 
       fs.appendFileSync(profile, `micromamba activate ${envName}\n`)
@@ -541,7 +541,7 @@ function issueCommand(command, message) {
 exports.issueCommand = issueCommand;
 //# sourceMappingURL=file-command.js.map
 
-/***/ }),
+/***/. }),
 
 /***/ 278:
 /***/ ((__unused_webpack_module, exports) => {
